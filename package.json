@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
     "lint": "prettier --write --config .prettier src/*.ts"
   },
   "keywords": [],
@@ -17,5 +18,8 @@
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.7.2"
+  },
+  "dependencies": {
+    "mapbox-gl": "^2.0.0"
   }
 }
