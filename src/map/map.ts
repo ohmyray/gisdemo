@@ -2,7 +2,7 @@ import { MapboxOptions } from './interface/MapboxOptions'
 import { Map } from 'mapbox-gl'
 import { accessToken } from '@/common/configs'
 
-class MapBox implements Map {
+class MapBox {
   _pmap!: Map
   _mapDefault!: MapboxOptions
   constructor(options?: MapboxOptions) {
@@ -11,8 +11,8 @@ class MapBox implements Map {
   }
 
   /**
-   * 
-   * @param options 
+   *
+   * @param options
    */
   init(options?: MapboxOptions): MapBox {
     if (!!options) this._mapDefault = options
