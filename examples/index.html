@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapbox</title>
-  <link href='./css/mapbase.css' rel='stylesheet' />
-  <script src="../dist/main.js"></script>
-</head>
-<body>
-  <div id="map"></div>
-  <script>
-    // new 
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapbox</title>
+    <link href="./css/mapbox-gl.css" rel="stylesheet" />
+    <link href="./css/base.css" rel="stylesheet" />
+    <script src="../dist/vendors-node_modules_mapbox-gl_dist_mapbox-gl_js.js"></script>
+    <script src="../dist/main.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var option = {
+        container: 'map',
+        // style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        style: 'mapbox://styles/mapbox/dark-v9',
+        center: [113.10894958495152, 23.03159932519992], // starting position [lng, lat]
+        // center: [109.8434734, 19.2483445],
+        zoom: 9, // starting zoom
+      }
+      var map = new MapBox()
+      map.init(option)
+    </script>
+  </body>
 </html>
