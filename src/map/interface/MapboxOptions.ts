@@ -5,6 +5,9 @@ import {
   TransformRequestFunction,
 } from 'mapbox-gl'
 
+/**
+ * 地图参数
+ */
 export interface MapboxOptions {
   /**
    * If true, the gl context will be created with MSA antialiasing, which can be useful for antialiasing custom layers.
@@ -214,3 +217,57 @@ export interface MapboxOptions {
    */
   accessToken?: string
 }
+
+/**
+ * 地图事件池
+ */
+export const eventList = [
+  'mousedown',
+  'mouseup',
+  'mouseover',
+  'mouseout',
+  'mousemove',
+  'mouseenter',
+  'mouseleave',
+  'click',
+  'dblclick',
+  'contextmenu',
+  'touchstart',
+  'touchend',
+  'touchcancel',
+  'wheel',
+  'resize',
+  'remove',
+  'touchmove',
+  'movestart',
+  'move',
+  'moveend',
+  'dragstart',
+  'drag',
+  'dragend',
+  'zoomstart',
+  'zoom',
+  'zoomend',
+  'rotatestart',
+  'rotate',
+  'rotateend',
+  'pitchstart',
+  'pitch',
+  'pitchend',
+  'boxzoomstart',
+  'boxzoomend',
+  'boxzoomcancel',
+  'webglcontextlost',
+  'webglcontextrestored',
+  'load',
+  'render',
+  'idle',
+  'error',
+  'data',
+  'styledata',
+  'sourcedata',
+  'dataloading',
+  'styledataloading',
+  'sourcedataloading',
+  'styleimagemissing',
+]

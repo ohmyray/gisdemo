@@ -1,17 +1,19 @@
-import { MapboxOptions } from './interface/MapboxOptions'
-import {/* webpackPrefetch: true */ Map } from 'mapbox-gl'
+import { MapboxOptions, eventList } from './interface/MapboxOptions'
+import { /* webpackPrefetch: true */ Map } from 'mapbox-gl'
 import { accessToken } from '@/common/configs'
+import { Emitter } from '@/util/event-emitter'
 
-class MapBox {
+class MapBox extends Emitter {
   _pmap!: Map
   _mapDefault!: MapboxOptions
   constructor(options?: MapboxOptions) {
+    super()
     options && (options.accessToken = accessToken)
     options && (this._pmap = new Map(options))
   }
 
   /**
-   *
+   * 初始化地图方法
    * @param options
    */
   init(options?: MapboxOptions): MapBox {
@@ -19,8 +21,61 @@ class MapBox {
     if (!!options) this._mapDefault = options
     if (!!!this._mapDefault) console.error(`参数为${options}!`)
     this._mapDefault && (this._pmap = new Map(this._mapDefault))
+    // this.registerEvent()
+    // this._pmap.on('load', () => {
+    //   console.log('load 事件注册')
+    // })
     return this
   }
+
+  on(eventName: string, layerId: string | Function, callback?: Function) {
+    if (typeof layerId === 'function')
+      this._pmap.on(<any>eventName, <any>layerId)
+    else this._pmap.on(<any>eventName, layerId, <any>callback)
+  }
+
+  off(eventName: string, layerId: string | Function, callback?: Function) {
+    if (typeof layerId === 'function')
+      this._pmap.off(<any>eventName, <any>layerId)
+    else this._pmap.off(<any>eventName, layerId, <any>callback)
+  }
+
+  once(eventName: string, layerId: string | Function, callback: Function) {
+    if (typeof layerId === 'function')
+      this._pmap.once(<any>eventName, <any>layerId)
+    else this._pmap.once(<any>eventName, layerId, <any>callback)
+  }
+
+  // protected registerEvent() {
+  //   if (this._pmap) {
+  //     for (let i = 0; i < eventList.length; i++) {
+  //       this._pmap.on(eventList[i], () => {
+  //         Emitter.$register(
+  //           eventList[i],
+  //           () => {
+  //             console.log(eventList[i] + '.loaded')
+  //           },
+  //           eventList[i] + '.loaded'
+  //         )
+  //       })
+  //     }
+  //   }
+  // }
+
+  // protected on(eventName: string, callback: Function) {
+  //   if (this._pmap) {
+  //     for (let i = 0; i < eventList.length; i++) {
+  //       eventList[i] === eventName &&
+  //         Emitter.$fire(
+  //           eventList[i],
+  //           () => {
+  //             console.log(eventList[i] + '.loaded')
+  //           },
+  //           eventList[i] + '.loaded'
+  //         )
+  //     }
+  //   }
+  // }
 }
 
 export { MapBox }
