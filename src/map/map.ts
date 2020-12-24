@@ -28,6 +28,10 @@ class MapBox extends Emitter {
     return this
   }
 
+  // getVersion() {
+  //   return this._pmap['version']
+  // }
+
   on(eventName: string, layerId: string | Function, callback?: Function) {
     if (typeof layerId === 'function')
       this._pmap.on(<any>eventName, <any>layerId)
