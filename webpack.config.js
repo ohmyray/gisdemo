@@ -1,8 +1,9 @@
 const path = require('path')
 
 const webpackBar = require('webpackbar')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 
-const logLoader = path.resolve(__dirname, 'loaders');
+const logLoader = path.resolve(__dirname, 'loaders')
 
 module.exports = {
   entry: './src/config.ts',
@@ -19,10 +20,23 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: [ 'ts-loader','loader-log'],
-        // use: ['loader-log', 'ts-loader'],
-        exclude: /node_modules/,
+        oneOf: [
+          {
+            test: /\.tsx?$/,
+            include: path.resolve(__dirname, 'src'),
+            use: [
+              // { loader: 'thread-loader', options: { workers: 2 } },
+              // 'cache-loader',
+              'ts-loader',
+              // {loader: 'ts-loader', options: {
+              //   cacheDirectory:true
+              // }},
+              'loader-log',
+            ],
+            // use: ['loader-log', 'ts-loader'],
+            // exclude: /node_modules/,
+          },
+        ],
       },
     ],
   },
@@ -42,6 +56,10 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
     },
+    minimize: true,
+    minimizer: [
+      new TerserWebpackPlugin()
+    ]
   },
 
   plugins: [
