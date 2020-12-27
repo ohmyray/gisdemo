@@ -1,23 +1,28 @@
 import { MapboxOptions, eventList } from './interface/MapboxOptions'
 import { /* webpackPrefetch: true */ Map } from 'mapbox-gl'
-import { accessToken } from '@/common/configs'
+import { Config } from './configs'
 import { Emitter } from '@/util/event-emitter'
 
 class MapBox extends Emitter {
+  // 地图引擎事件
   _pmap!: Map
+  // 地图默认配置
   _mapDefault!: MapboxOptions
+  // 引擎外部参数配置
+  _config: Config = Config.instance
+  // 地图构造器
   constructor(options?: MapboxOptions) {
     super()
-    options && (options.accessToken = accessToken)
+    options && (options.accessToken = this._config.AccessToken)
     options && (this._pmap = new Map(options))
   }
 
   /**
    * 初始化地图方法
-   * @param options
+   * @param options 
    */
   init(options?: MapboxOptions): MapBox {
-    options && (options.accessToken = accessToken)
+    options && (options.accessToken = this._config.AccessToken)
     if (!!options) this._mapDefault = options
     if (!!!this._mapDefault) console.error(`参数为${options}!`)
     this._mapDefault && (this._pmap = new Map(this._mapDefault))
@@ -28,91 +33,41 @@ class MapBox extends Emitter {
     return this
   }
 
-  // getVersion() {
-  //   return this._pmap['version']
-  // }
-
+  /**
+   * 监听事件
+   * @param eventName
+   * @param layerId
+   * @param callback
+   */
   on(eventName: string, layerId: string | Function, callback?: Function) {
     if (typeof layerId === 'function')
       this._pmap.on(<any>eventName, <any>layerId)
     else this._pmap.on(<any>eventName, layerId, <any>callback)
   }
 
+  /**
+   * 关闭事件
+   * @param eventName
+   * @param layerId
+   * @param callback
+   */
   off(eventName: string, layerId: string | Function, callback?: Function) {
     if (typeof layerId === 'function')
       this._pmap.off(<any>eventName, <any>layerId)
     else this._pmap.off(<any>eventName, layerId, <any>callback)
   }
 
+  /**
+   * 一次事件
+   * @param eventName
+   * @param layerId
+   * @param callback
+   */
   once(eventName: string, layerId: string | Function, callback: Function) {
     if (typeof layerId === 'function')
       this._pmap.once(<any>eventName, <any>layerId)
     else this._pmap.once(<any>eventName, layerId, <any>callback)
   }
-
-  // protected registerEvent() {
-  //   if (this._pmap) {
-  //     for (let i = 0; i < eventList.length; i++) {
-  //       this._pmap.on(eventList[i], () => {
-  //         Emitter.$register(
-  //           eventList[i],
-  //           () => {
-  //             console.log(eventList[i] + '.loaded')
-  //           },
-  //           eventList[i] + '.loaded'
-  //         )
-  //       })
-  //     }
-  //   }
-  // }
-
-  // protected on(eventName: string, callback: Function) {
-  //   if (this._pmap) {
-  //     for (let i = 0; i < eventList.length; i++) {
-  //       eventList[i] === eventName &&
-  //         Emitter.$fire(
-  //           eventList[i],
-  //           () => {
-  //             console.log(eventList[i] + '.loaded')
-  //           },
-  //           eventList[i] + '.loaded'
-  //         )
-  //     }
-  //   }
-  // }
 }
 
 export { MapBox }
-
-// import { MapboxOptions } from './interface/MapboxOptions'
-// import { Map } from 'mapbox-gl'
-// import { accessToken } from '@/common/configs'
-
-// class MapBox {
-//   _mapengine!: Map
-//   _options!: MapboxOptions
-//   constructor(options?: MapboxOptions) {
-//     this._options.accessToken = accessToken
-//     options && (this._options = { ...this._options, ...options })
-//   }
-
-//   /**
-//    *
-//    * @param options
-//    */
-//   public init(options?: MapboxOptions): MapBox {
-//     console.log(this._options, options)
-//     if (!!options) this._options = options
-//     if (!!!this._options) console.error(`参数为${options}!`)
-//     options && (this._options = { ...this._options, ...options })
-//     console.log(this._options)
-
-//     // this._options && (this._mapengine = new Map(this._options))
-//     // this._mapengine.on('load', function () {
-//     //   console.log('A load event occurred.')
-//     // })
-//     return this
-//   }
-// }
-
-// export { MapBox }

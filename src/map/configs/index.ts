@@ -10,17 +10,39 @@
 //     // console.log('changeName after');
 // }
 
-
 /**
  * Mapbox配置类
  */
 class Config {
   constructor() {}
-  accessToken: string =
+  public static instance: Config = new Config()
+  protected _accessToken: string =
     'pk.eyJ1Ijoib2hteXJheSIsImEiOiJja2FvMHlrNnUxd3FlMnNtcXQ2YzR6cDNhIn0.VOodHc8C2T6ldql4mnsSeg'
+  protected _baseApiUrl: string = 'https://api.mapbox.com'
+  protected _maxParallelImageRequests: number = 10
 
   get AccessToken(): string {
-    return this.accessToken
+    return this._accessToken
+  }
+
+  set AccessToken(accessToken: string) {
+    this._accessToken = accessToken
+  }
+
+  get BaseApiUrl(): string {
+    return this._baseApiUrl
+  }
+
+  set BaseApiUrl(baseApiUrl: string) {
+    this._baseApiUrl = baseApiUrl
+  }
+
+  get MaxParallelImageRequests(): number {
+    return this._maxParallelImageRequests
+  }
+
+  set MaxParallelImageRequests(maxParallelImageRequests: number) {
+    this._maxParallelImageRequests = maxParallelImageRequests
   }
 }
 
