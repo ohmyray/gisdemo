@@ -16,10 +16,10 @@
 class Config {
   constructor() {}
   public static instance: Config = new Config()
-  protected _accessToken: string =
+  private _accessToken: string =
     'pk.eyJ1Ijoib2hteXJheSIsImEiOiJja2FvMHlrNnUxd3FlMnNtcXQ2YzR6cDNhIn0.VOodHc8C2T6ldql4mnsSeg'
-  protected _baseApiUrl: string = 'https://api.mapbox.com'
-  protected _maxParallelImageRequests: number = 10
+  private _baseApiUrl: string = 'https://api.mapbox.com'
+  private _maxParallelImageRequests: number = 10
 
   get AccessToken(): string {
     return this._accessToken

@@ -4,6 +4,27 @@ import {
   LngLatLike,
   TransformRequestFunction,
 } from 'mapbox-gl'
+import {
+  BackgroundLayer,
+  CircleLayer,
+  FillExtrusionLayer,
+  FillLayer,
+  HeatmapLayer,
+  HillshadeLayer,
+  LineLayer,
+  RasterLayer,
+  SymbolLayer,
+  CustomLayerInterface,
+} from 'mapbox-gl'
+import {
+  GeoJSONSourceRaw,
+  VideoSourceRaw,
+  ImageSourceRaw,
+  CanvasSourceRaw,
+  VectorSource,
+  RasterSource,
+  RasterDemSource,
+} from 'mapbox-gl'
 
 /**
  * 地图参数
@@ -219,6 +240,15 @@ export interface MapboxOptions {
 }
 
 /**
+ * 地图控件
+ */
+export interface IControl {
+  onAdd(map: any): HTMLElement
+  onRemove(map: any): void
+  getDefaultPosition?: () => string
+}
+
+/**
  * 地图事件池
  */
 export const eventList = [
@@ -271,3 +301,108 @@ export const eventList = [
   'sourcedataloading',
   'styleimagemissing',
 ]
+
+export type AnyLayer =
+  | BackgroundLayer
+  | CircleLayer
+  | FillExtrusionLayer
+  | FillLayer
+  | HeatmapLayer
+  | HillshadeLayer
+  | LineLayer
+  | RasterLayer
+  | SymbolLayer
+  | CustomLayerInterface
+
+export type AnySourceData =
+  | GeoJSONSourceRaw
+  | VideoSourceRaw
+  | ImageSourceRaw
+  | CanvasSourceRaw
+  | VectorSource
+  | RasterSource
+  | RasterDemSource
+
+type Visibility = 'visible' | 'none'
+export interface Layout {
+  visibility?: Visibility
+}
+interface Layer {
+  id: string
+  type: string
+  metadata?: any
+  ref?: string
+  source?: string | AnySourceData
+  'source-layer'?: string
+  minzoom?: number
+  maxzoom?: number
+  interactive?: boolean
+  filter?: any[]
+  layout?: Layout
+  paint?: object
+}
+
+export type MapboxGeoJSONFeature = GeoJSON.Feature<GeoJSON.Geometry> & {
+  layer: Layer
+  source: string
+  sourceLayer: string
+  state: { [key: string]: any }
+}
+
+export type PointLike = [number, number]
+
+export interface FilterOptions {
+  /**
+   *是否检查过滤器是否符合Mapbox GL样式规范。
+   *禁用验证是一项性能优化，仅应使用
+   *如果您之前已经验证过这些值，则将传递给该函数。
+   */
+  validate?: boolean | null
+}
+
+/**
+ * AnimationOptions
+ */
+export interface AnimationOptions {
+  /** Number in milliseconds */
+  duration?: number
+  /**
+   * A function taking a time in the range 0..1 and returning a number where 0 is the initial
+   * state and 1 is the final state.
+   */
+  easing?: (time: number) => number
+  /** point, origin of movement relative to map center */
+  offset?: PointLike
+  /** When set to false, no animation happens */
+  animate?: boolean
+
+  /** If `true`, then the animation is considered essential and will not be affected by `prefers-reduced-motion`.
+   * Otherwise, the transition will happen instantly if the user has enabled the `reduced motion` accesibility feature in their operating system.
+   */
+  essential?: boolean
+}
+
+/**
+ * CameraOptions
+ */
+export interface CameraOptions {
+  /** Map center */
+  center?: LngLatLike
+  /** Map zoom level */
+  zoom?: number
+  /** Map rotation bearing in degrees counter-clockwise from north */
+  bearing?: number
+  /** Map angle in degrees at which the camera is looking at the ground */
+  pitch?: number
+  /** If zooming, the zoom center (defaults to map center) */
+  around?: LngLatLike
+}
+
+/**
+ * EaseToOptions
+ */
+export interface EaseToOptions extends AnimationOptions, CameraOptions {
+  delayEndEvents?: number
+}
+
+export type EventData = { [key: string]: any };
