@@ -1,0 +1,18 @@
+{    
+    "description": "测试样式",
+    "config": {
+      "id": "style_psr_20200219",
+      "version": 8,
+      "metadata": {},
+      "sources": {},
+      "sprite": "{assetsHost}/assets/sprites/mergesprite",
+      "glyphs": "{assetsHost}/assets/{fontstack}/{range}.pbf",
+      "layers": []
+    },
+    "minemap": "",
+    "layers": [
+      { "background": true },
+      { "adminvision_maps_source": true },
+      { "psrsourcename": true }
+    ]
+  }  

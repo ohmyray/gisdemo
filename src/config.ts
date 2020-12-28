@@ -1,3 +1,7 @@
 import { MapBox } from './map'
 
-export { MapBox }
+import { Axios } from './axios'
+
+export { MapBox, Axios }
+
+export default MapBox

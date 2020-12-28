@@ -25,6 +25,8 @@ import {
 import { Config } from './configs'
 import { Emitter } from '@/util/event-emitter'
 
+import { MapStyle } from './style'
+
 class MapBox extends Emitter {
   // 地图引擎事件
   _pmap!: Map
@@ -36,6 +38,7 @@ class MapBox extends Emitter {
   constructor(options?: MapboxOptions) {
     super()
     options && (options.accessToken = this._config.AccessToken)
+    // if (options?.style) options.style =  MapStyle.StyleSerialize(<string>options.style)
     options && (this._pmap = new Map(options))
   }
 

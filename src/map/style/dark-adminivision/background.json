@@ -1,0 +1,11 @@
+{
+  "sources": {},
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": { "background-color": "#000000" },
+      "interactive": true
+    }
+  ]
+}
