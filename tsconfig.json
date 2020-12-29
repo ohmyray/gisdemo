@@ -69,5 +69,14 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
   "exclude": ["node_modules"],
-  "files": ["types/mapboxgl.d.ts"]
+  "include": [
+    "module/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.json",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "files": ["types/mapboxgl.d.ts"] /* 详细配置参数 https://blog.csdn.net/weixin_30758821/article/details/101713657 */
 }
