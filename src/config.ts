@@ -1,7 +1,11 @@
 import { MapBox } from './map'
 
-import { Axios } from './axios'
+import {  $fetch } from './axios'
 
-export { MapBox, Axios }
+const WebGIS = {
+  Map: MapBox,
+  $fetch,
+}
 
-export default MapBox
+export { WebGIS }
+// export { MapBox }

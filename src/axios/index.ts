@@ -1,8 +1,8 @@
-export * from './service'
+// export * from './service'
 
 import { Axios } from './service'
 
 // 初始化
-Axios.init()
+const $fetch = Axios.init()
 
-export { Axios }
+export { $fetch }

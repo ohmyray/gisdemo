@@ -6,7 +6,7 @@
     <title>Mapbox</title>
     <link href="./css/mapbox-gl.css" rel="stylesheet" />
     <link href="./css/base.css" rel="stylesheet" />
-    <script src="../dist/vendors-node_modules_mapbox-gl_dist_mapbox-gl_js.js"></script>
+    <script src="../dist/vendors-node_modules_axios_index_js-node_modules_mapbox-gl_dist_mapbox-gl_js.js"></script>
     <script src="../dist/main.js"></script>
   </head>
   <body>
@@ -20,7 +20,7 @@
         // center: [109.8434734, 19.2483445],
         zoom: 9, // starting zoom
       }
-      var map = new MapBox()
+      var map = new WebGIS.Map()
       map.init(option)
 
       map.on('load', function () {

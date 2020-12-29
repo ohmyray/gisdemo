@@ -51,6 +51,10 @@ module.exports = {
   resolveLoader: {
     modules: [logLoader, 'node_modules'],
   },
+  
+  externals: {
+    mapboxgl: "mapbox-gl",
+  },
 
   optimization: {
     splitChunks: {
@@ -63,7 +67,7 @@ module.exports = {
   },
 
   plugins: [
-    // new webpackBar()
+    new webpackBar()
   ],
 
   performance: {
