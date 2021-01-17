@@ -25,7 +25,7 @@ import {
 import { Config } from './configs'
 import { Emitter } from '@/util/event-emitter'
 
-import { MapStyle } from './style'
+import { ObtSytle } from './style'
 
 class MapBox extends Emitter {
   // 地图引擎事件
@@ -34,11 +34,16 @@ class MapBox extends Emitter {
   _mapDefault!: MapboxOptions
   // 引擎外部参数配置
   _config: Config = Config.instance
+  _regulatorObt!: ObtSytle
   // 地图构造器
   constructor(options?: MapboxOptions) {
     super()
+    this._regulatorObt = new ObtSytle()
     options && (options.accessToken = this._config.AccessToken)
-    // if (options?.style) options.style =  MapStyle.StyleSerialize(<string>options.style)
+    if (options?.style)
+      options.style = this._regulatorObt.SerializableStyle(
+        <string>options.style
+      )
     options && (this._pmap = new Map(options))
   }
 
@@ -55,6 +60,10 @@ class MapBox extends Emitter {
     // this._pmap.on('load', () => {
     //   console.log('load 事件注册')
     // })
+    if (options?.style)
+      options.style = this._regulatorObt.SerializableStyle(
+        <string>options.style
+      )
     return this
   }
 

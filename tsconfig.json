@@ -78,5 +78,5 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-  "files": ["types/mapboxgl.d.ts"] /* 详细配置参数 https://blog.csdn.net/weixin_30758821/article/details/101713657 */
+  "files": ["types/mapboxgl.d.ts", "types/index.d.ts"] /* 详细配置参数 https://blog.csdn.net/weixin_30758821/article/details/101713657 */
 }

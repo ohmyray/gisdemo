@@ -19,6 +19,7 @@
         center: [113.10894958495152, 23.03159932519992], // starting position [lng, lat]
         // center: [109.8434734, 19.2483445],
         zoom: 9, // starting zoom
+        
       }
       var map = new WebGIS.Map()
       map.init(option)
@@ -117,7 +118,7 @@
               console.log(zoom)
               map.easeTo({
                 center: features[0].geometry.coordinates,
-                zoom: zoom+1,
+                zoom: zoom+3,
               })
             })
         })
