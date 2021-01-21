@@ -1,4 +1,5 @@
 import { MapboxStyle } from './util/MapStyle'
+import { $fetch } from '@/axios'
 
 // 样式前缀
 // enum StylePrefix {
@@ -33,9 +34,9 @@ class ObtSytle {
     // 正则匹配  /^[a-z]+:\/\//i  前面的前缀://
     const regex = /^(([a-z]+):\/\/)/i
     let m
-    let styleHead: any[] = []
+    let styleProtocol: any[] = []
     if ((m = regex.exec(style)) !== null)
-      m.forEach((match, groupIndex) => styleHead.push(match))
+      m.forEach((match, groupIndex) => styleProtocol.push(match))
 
     // 地图样式规则凭借
     // let execStr: string = ''
@@ -74,23 +75,31 @@ class ObtSytle {
     //   StylePrefix[keyToAny]
     // }
     // console.log(styleHead[1]);
-    
-    switch (styleHead[2]) {
+
+    switch (styleProtocol[2]) {
       case StylePrefix.MAPBOX:
-          console.log('mapbox');
-          
-        break;
+        console.log('mapbox')
+
+        break
       case StylePrefix.MINEMAP:
-        
-        break;
+        break
       case StylePrefix.WEBGIS:
+        console.log('styleProtocol: ',styleProtocol);
         
-        break;
-    
+        let stylePath = style.replace(styleProtocol[1], '')
+
+        this.generateWebgisStyle(stylePath)
+        break
+
       default:
-        break;
+        break
     }
-    
+  }
+
+  //  构造样式
+  generateWebgisStyle(path: string) {
+    console.log(path);
+    $fetch.get('').then()
   }
 }
 

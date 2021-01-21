@@ -3,6 +3,6 @@
 import { Axios } from './service'
 
 // 初始化
-const $fetch = Axios.init()
+const $fetch = Axios;
 
 export { $fetch }

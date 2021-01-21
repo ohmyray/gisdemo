@@ -8,6 +8,10 @@ import { $fetch } from './axios'
 //   MINEMAP: 'minemap://',
 // }
 // window['mapSupport'] = <any>StylePrefix
+let projectConfig = window['projectConfig']
+projectConfig['hostURL'] = window.origin
+projectConfig['asstesFolderName'] = 'asstes'
+// window['projectConfig']['hostURL'] = window.origin
 
 const WebGIS = {
   Map: MapBox,
